@@ -8,11 +8,11 @@ const ContactList = () => {
   const { items, isLoading, error } = useSelector((state) => state.contacts);
 
   useEffect(() => {
-    dispatch(fetchContacts()); // Fetch contacts from MockAPI on component mount
+    dispatch(fetchContacts()); 
   }, [dispatch]);
 
   const handleDelete = (id) => {
-    dispatch(deleteContact(id)); // Dispatch to delete the contact
+    dispatch(deleteContact(id)); 
   };
 
   if (isLoading) return <p>Loading...</p>;

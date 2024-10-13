@@ -5,7 +5,6 @@ import styles from './Filter.module.css';
 const Filter = ({ filter, onChange }) => {
   const contacts = useSelector((state) => state.contacts.items);
   
-  // Implement filtering logic
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );

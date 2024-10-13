@@ -11,7 +11,7 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const contact = { name, phone };
-    dispatch(addContact(contact)); // Dispatch to add the new contact to the backend
+    dispatch(addContact(contact)); 
     setName('');
     setPhone('');
   };
