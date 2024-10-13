@@ -1,24 +1,29 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../store/contactsSlice';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts, deleteContact } from '../store/contactsSlice';
+import styles from './ContactList.module.css';
 
 const ContactList = () => {
-  const contacts = useSelector((state) => state.contacts.items);
-  const filter = useSelector((state) => state.contacts.filter);
   const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector((state) => state.contacts);
 
-  const filteredContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  useEffect(() => {
+    dispatch(fetchContacts()); // Fetch contacts from MockAPI on component mount
+  }, [dispatch]);
+
+  const handleDelete = (id) => {
+    dispatch(deleteContact(id)); // Dispatch to delete the contact
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
-    <ul>
-      {filteredContacts.map(contact => (
-        <li key={contact.id}>
-          {contact.name}: {contact.number}
-          <button onClick={() => dispatch(deleteContact(contact.id))}>
-            Delete
-          </button>
+    <ul className={styles.list}>
+      {items.map(({ id, name, phone }) => (
+        <li key={id} className={styles.listItem}>
+          {name}: {phone}
+          <button onClick={() => handleDelete(id)}>Delete</button>
         </li>
       ))}
     </ul>

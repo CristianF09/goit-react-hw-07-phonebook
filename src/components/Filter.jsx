@@ -1,20 +1,27 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { setFilter } from '../store/contactsSlice';
+import { useSelector } from 'react-redux';
+import styles from './Filter.module.css';
 
-const Filter = () => {
-  const dispatch = useDispatch();
-
-  const handleFilterChange = (e) => {
-    dispatch(setFilter(e.target.value));
-  };
+const Filter = ({ filter, onChange }) => {
+  const contacts = useSelector((state) => state.contacts.items);
+  
+  // Implement filtering logic
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
-    <input 
-      type="text" 
-      placeholder="Search contacts" 
-      onChange={handleFilterChange} 
-    />
+    <div className={styles.filter}>
+      <label>
+        Find contacts by name:
+        <input type="text" value={filter} onChange={onChange} />
+      </label>
+      <ul>
+        {filteredContacts.map(({ id, name }) => (
+          <li key={id}>{name}</li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
