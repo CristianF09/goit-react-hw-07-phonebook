@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts, deleteContact } from '../../store/contactsSlice';
-import styles from './ContactList.module.css';
+import { fetchContacts, deleteContact } from '../../store/contactsSlice'; 
+import styles from './ContactList.module.css'; 
 
 const ContactList = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector((state) => state.contacts);
+  const { items = [], isLoading, error } = useSelector((state) => state.contacts); 
 
   useEffect(() => {
     dispatch(fetchContacts()); 

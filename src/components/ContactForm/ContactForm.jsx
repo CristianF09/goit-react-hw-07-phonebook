@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addContact } from '../../store/contactsSlice';
-import styles from './ContactForm.module.css';
+import { addContact } from '../../store/contactsSlice'; 
+import styles from './ContactForm.module.css'; 
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const contact = { name, phone };
-    dispatch(addContact(contact)); 
+    dispatch(addContact({ name, phone })); 
     setName('');
     setPhone('');
   };
@@ -19,7 +18,7 @@ const ContactForm = () => {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label>
-        Name:
+        Name
         <input
           type="text"
           value={name}
@@ -28,7 +27,7 @@ const ContactForm = () => {
         />
       </label>
       <label>
-        Phone:
+        Phone
         <input
           type="tel"
           value={phone}
