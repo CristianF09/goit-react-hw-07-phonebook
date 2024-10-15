@@ -10,7 +10,7 @@ const ContactForm = () => {
   const [phone, setPhone] = useState('');
 
   useEffect(() => {
-    dispatch(fetchContacts()); // Fetch contacts on mount
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   const handleSubmit = (e) => {
@@ -22,6 +22,7 @@ const ContactForm = () => {
     }
 
     dispatch(addContact({ name, phone }));
+    
     setName('');
     setPhone('');
   };
@@ -41,13 +42,13 @@ const ContactForm = () => {
       </label>
       <label htmlFor="phone">
         Phone
-        <input
+       <input
           id="phone"
           type="tel"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           placeholder="Enter phone number"
-          pattern="^[0-9\s()\-+]*$"
+          pattern="[0-9\s()\-+]*"  
           title="Phone number should contain digits, spaces, and optionally +, -, (, )"
           required
         />

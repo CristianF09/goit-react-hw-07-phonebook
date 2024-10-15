@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_URL = 'https://61b2c06fcf4d340017187517.mockapi.io/api/v1/contacts'; // Change this to your actual API endpoint
+const API_URL = 'https://670baecb7e5a228ec1ce4683.mockapi.io/api/contacts'; 
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
   const response = await axios.get(API_URL);
@@ -18,14 +18,20 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact', async (i
   return id;
 });
 
+
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
     items: [],
     isLoading: false,
     error: null,
+    filter: "", 
   },
-  reducers: {},
+  reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload; 
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.pending, (state) => {
@@ -49,4 +55,6 @@ const contactsSlice = createSlice({
   },
 });
 
+
+export const { setFilter } = contactsSlice.actions;
 export default contactsSlice.reducer;

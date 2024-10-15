@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 import styles from './Filter.module.css';
 
 const Filter = ({ filter, onChange }) => {
-  // Using useSelector to get contacts from the Redux store
+  
   const contacts = useSelector((state) => state.contacts.items) || [];
 
-  // Filter contacts based on the search input
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -18,7 +17,7 @@ const Filter = ({ filter, onChange }) => {
         Find contacts by name:
         <input type="text" value={filter} onChange={onChange} />
       </label>
-      {/* Display filtered contacts */}
+      
       {filteredContacts.length > 0 ? (
         <ul>
           {filteredContacts.map(({ id, name }) => (
@@ -26,7 +25,7 @@ const Filter = ({ filter, onChange }) => {
           ))}
         </ul>
       ) : (
-        <p>No contacts found</p> // Message when no contacts match the filter
+        <p>No contacts found</p> 
       )}
     </div>
   );

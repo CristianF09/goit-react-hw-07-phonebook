@@ -4,7 +4,7 @@ import contactsReducer from './contactsSlice';
 const store = configureStore({
   reducer: {
     contacts: contactsReducer,
-    // other reducers can be added here
+   
   },
 });
 
